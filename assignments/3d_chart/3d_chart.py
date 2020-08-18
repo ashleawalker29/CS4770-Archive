@@ -1,14 +1,15 @@
-from plotly import tools, graph_objs
+import os
+
 import plotly
 import numpy
 from pandas import read_csv
 
 # Offline mode
 plotly.offline.init_notebook_mode(connected=True)
-dataframe = read_csv('D:\\Documents\\CS4770_datasets\\dnd_character_survey_clarified.csv')
+dataframe = read_csv(os.path.abspath('../../csv/dnd_character_survey_clarified.csv'))
 
 
-trace1 = graph_objs.Scatter3d(
+trace1 = plotly.graph_objs.Scatter3d(
     x=dataframe['Primary_Class'],
     y=dataframe['Race'],
     z=dataframe['Alignment'],
@@ -21,7 +22,8 @@ trace1 = graph_objs.Scatter3d(
 )
 
 data = [trace1]
-layout=graph_objs.Layout(
+
+layout = plotly.graph_objs.Layout(
     title='Favorite D&D Character Combinations',
     scene = dict(
         xaxis=dict(
@@ -33,5 +35,6 @@ layout=graph_objs.Layout(
     )
 )
 
-fig=graph_objs.Figure(data=data, layout=layout)
-plotly.offline.plot(fig, filename='AWalker_3d_chart.html')
+figure = plotly.graph_objs.Figure(data=data, layout=layout)
+
+plotly.offline.plot(figure, filename='3d_chart.html')
