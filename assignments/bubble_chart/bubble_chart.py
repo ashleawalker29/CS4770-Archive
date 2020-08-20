@@ -1,13 +1,13 @@
-from plotly import tools, graph_objs
+import os
+
 import plotly
-import numpy
 from pandas import read_csv
 
-# Offline mode
+# Plotly offline mode
 plotly.offline.init_notebook_mode(connected=True)
-dataframe = read_csv('D:\\Documents\\CS4770_datasets\\dnd_character_survey_clarified.csv')
+dataframe = read_csv(os.path.abspath('../../csv/dnd_character_survey_clarified.csv'))
 
-trace1 = graph_objs.Scatter(
+trace1 = plotly.graph_objs.Scatter(
     x = dataframe['Age'],
     y = dataframe['Characters_Played'],
     text = dataframe['Characters_Played'],
@@ -20,7 +20,7 @@ trace1 = graph_objs.Scatter(
     )
 )
 
-layout = graph_objs.Layout(
+layout = plotly.graph_objs.Layout(
     title = 'Player Age and the Number of Characters They\'ve Played',
     hovermode = 'closest',
     xaxis = dict(
@@ -33,5 +33,6 @@ layout = graph_objs.Layout(
 
 data = [trace1]
 
-fig=graph_objs.Figure(data=data, layout=layout)
-plotly.offline.plot(fig, filename='AWalker_bubble_chart.html')
+figure = plotly.graph_objs.Figure(data=data, layout=layout)
+
+plotly.offline.plot(figure, filename='bubble_chart.html')
