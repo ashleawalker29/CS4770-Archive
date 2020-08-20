@@ -26,4 +26,4 @@ histogram_text = histogram.mark_text(
 
 full_histogram = histogram + histogram_text
 
-full_histogram.save('histogram_chart.html')
+full_histogram.save('histogram.html')
