@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": {"type": "bar", "size": 30}, "encoding": {"color": {"type": "nominal", "field": "Platform", "legend": null, "scale": {"range": ["#d20014"]}}, "tooltip": [{"type": "quantitative", "field": "Name", "title": "Games"}], "x": {"type": "nominal", "axis": {"title": "Platform"}, "field": "Platform"}, "y": {"type": "quantitative", "axis": {"title": "Number of Games"}, "field": "Name"}}, "title": "Unique Games Nintendo Published per Nintendo Platform as of December 2016", "width": 410}, {"mark": {"type": "text", "baseline": "middle", "color": "black", "dy": -7}, "encoding": {"color": {"type": "nominal", "field": "Platform", "legend": null, "scale": {"range": ["#d20014"]}}, "opacity": {"value": 3.0}, "text": {"type": "quantitative", "field": "Name"}, "tooltip": [{"type": "quantitative", "field": "Name", "title": "Games"}], "x": {"type": "nominal", "axis": {"title": "Platform"}, "field": "Platform"}, "y": {"type": "quantitative", "axis": {"title": "Number of Games"}, "field": "Name"}}, "title": "Unique Games Nintendo Published per Nintendo Platform as of December 2016", "width": 410}], "data": {"name": "data-2b5154fafb7870af94fe92aeaf36acb6"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-2b5154fafb7870af94fe92aeaf36acb6": [{"Platform": "3DS", "Name": 84, "Year_of_Release": 84, "Genre": 84, "Publisher": 84, "NA_Sales": 84, "EU_Sales": 84, "JP_Sales": 84, "Other_Sales": 84, "Global_Sales": 84, "Critic_Score": 44, "Critic_Count": 44, "User_Score": 45, "User_Count": 44, "Developer": 45, "Rating": 44}, {"Platform": "DS", "Name": 151, "Year_of_Release": 149, "Genre": 151, "Publisher": 151, "NA_Sales": 151, "EU_Sales": 151, "JP_Sales": 151, "Other_Sales": 151, "Global_Sales": 151, "Critic_Score": 81, "Critic_Count": 81, "User_Score": 81, "User_Count": 72, "Developer": 82, "Rating": 81}, {"Platform": "GB", "Name": 61, "Year_of_Release": 60, "Genre": 61, "Publisher": 61, "NA_Sales": 61, "EU_Sales": 61, "JP_Sales": 61, "Other_Sales": 61, "Global_Sales": 61, "Critic_Score": 0, "Critic_Count": 0, "User_Score": 0, "User_Count": 0, "Developer": 0, "Rating": 0}, {"Platform": "GBA", "Name": 91, "Year_of_Release": 91, "Genre": 91, "Publisher": 91, "NA_Sales": 91, "EU_Sales": 91, "JP_Sales": 91, "Other_Sales": 91, "Global_Sales": 91, "Critic_Score": 47, "Critic_Count": 47, "User_Score": 47, "User_Count": 42, "Developer": 47, "Rating": 47}, {"Platform": "GC", "Name": 53, "Year_of_Release": 53, "Genre": 53, "Publisher": 53, "NA_Sales": 53, "EU_Sales": 53, "JP_Sales": 53, "Other_Sales": 53, "Global_Sales": 53, "Critic_Score": 47, "Critic_Count": 47, "User_Score": 47, "User_Count": 47, "Developer": 47, "Rating": 47}, {"Platform": "N64", "Name": 60, "Year_of_Release": 59, "Genre": 60, "Publisher": 60, "NA_Sales": 60, "EU_Sales": 60, "JP_Sales": 60, "Other_Sales": 60, "Global_Sales": 60, "Critic_Score": 0, "Critic_Count": 0, "User_Score": 0, "User_Count": 0, "Developer": 0, "Rating": 0}, {"Platform": "NES", "Name": 45, "Year_of_Release": 45, "Genre": 45, "Publisher": 45, "NA_Sales": 45, "EU_Sales": 45, "JP_Sales": 45, "Other_Sales": 45, "Global_Sales": 45, "Critic_Score": 0, "Critic_Count": 0, "User_Score": 0, "User_Count": 0, "Developer": 0, "Rating": 0}, {"Platform": "SNES", "Name": 36, "Year_of_Release": 36, "Genre": 36, "Publisher": 36, "NA_Sales": 36, "EU_Sales": 36, "JP_Sales": 36, "Other_Sales": 36, "Global_Sales": 36, "Critic_Score": 0, "Critic_Count": 0, "User_Score": 0, "User_Count": 0, "Developer": 0, "Rating": 0}, {"Platform": "Wii", "Name": 83, "Year_of_Release": 81, "Genre": 83, "Publisher": 83, "NA_Sales": 83, "EU_Sales": 83, "JP_Sales": 83, "Other_Sales": 83, "Global_Sales": 83, "Critic_Score": 58, "Critic_Count": 58, "User_Score": 58, "User_Count": 56, "Developer": 61, "Rating": 57}, {"Platform": "WiiU", "Name": 42, "Year_of_Release": 42, "Genre": 42, "Publisher": 42, "NA_Sales": 42, "EU_Sales": 42, "JP_Sales": 42, "Other_Sales": 42, "Global_Sales": 42, "Critic_Score": 33, "Critic_Count": 33, "User_Score": 33, "User_Count": 33, "Developer": 33, "Rating": 33}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
