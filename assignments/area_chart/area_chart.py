@@ -1,20 +1,22 @@
-"""
-This module is intended to create an Area Chart from a .csv file.
-Author: Ashlea Walker
-"""
+import os
+
 import altair
 from pandas import read_csv
 
-dataset = read_csv('D:\\Documents\\CS4770_datasets\\Video_Games_Sales_as_at_22_Dec_2016.csv')
+dataset = read_csv(os.path.abspath('video_games_sales_as_of_22_Dec_2016.csv'))
 
-nin_data = dataset[dataset['Publisher'] == 'Nintendo']
-nin_data = nin_data.dropna(subset=['Year_of_Release'])
-sony_data = dataset[dataset['Publisher'] == 'Sony Computer Entertainment']
-sony_data = sony_data.dropna(subset=['Year_of_Release'])
-ms_data = dataset[dataset['Publisher'] == 'Microsoft Game Studios']
-ms_data = ms_data.dropna(subset=['Year_of_Release'])
+# Obtain all publisher's datasets seperately.
+nintendo_dataset = dataset[dataset['Publisher'] == 'Nintendo']
+sony_dataset = dataset[dataset['Publisher'] == 'Sony Computer Entertainment']
+microsoft_dataset = dataset[dataset['Publisher'] == 'Microsoft Game Studios']
 
-nin_chart = altair.Chart(nin_data).mark_area(color='#d20014', opacity=0.3).encode(
+# Obtain all game titles that have a registered 'Year of Release'.
+nintendo_data = nintendo_dataset.dropna(subset=['Year_of_Release'])
+sony_data = sony_dataset.dropna(subset=['Year_of_Release'])
+microsoft_data = microsoft_dataset.dropna(subset=['Year_of_Release'])
+
+# Generate a chart for each game company (Nintendo, Sony, and Microsoft).
+nintendo_chart = altair.Chart(nintendo_data).mark_area(color='#d20014', opacity=0.3).encode(
     altair.X('Year_of_Release:O', axis=altair.Axis(title='Year of Release')),
     altair.Y('count()', axis=altair.Axis(title='Number of Games'), stack=None),
     altair.Color('Publisher:N', scale=altair.Scale(range=['#0e7a0d', '#d20014', '#003791']))
@@ -28,13 +30,15 @@ sony_chart = altair.Chart(sony_data).mark_area(opacity=0.3).encode(
     altair.Color('Publisher:N')
 )
 
-ms_chart = altair.Chart(ms_data).mark_area(opacity=0.3).encode(
+microsoft_chart = altair.Chart(microsoft_data).mark_area(opacity=0.3).encode(
     altair.X('Year_of_Release:O', axis=altair.Axis(title='Year of Release')),
     altair.Y('count()', axis=altair.Axis(title='Number of Games'), stack=None),
     altair.Color('Publisher:N')
 )
 
-full_chart = altair.layer(nin_chart, sony_chart)
-full_chart = altair.layer(full_chart, ms_chart)
+# Layer all generated charts together to form one cohesive chart.
+game_companies_chart = altair.layer(nintendo_chart, sony_chart)
+game_companies_chart = altair.layer(game_companies_chart, microsoft_chart)
 
-full_chart
+# Generate final chart.
+game_companies_chart
