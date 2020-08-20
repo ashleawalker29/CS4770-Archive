@@ -3,7 +3,7 @@ import os
 import altair
 from pandas import read_csv
 
-dataset = read_csv(os.path.abspath('video_games_sales_as_of_22_Dec_2016.csv'))
+dataset = read_csv(os.path.abspath('../../csv/video_games_sales_as_of_22_Dec_2016.csv'))
 
 # Obtain all publisher's datasets seperately.
 nintendo_dataset = dataset[dataset['Publisher'] == 'Nintendo']
@@ -41,4 +41,4 @@ game_companies_chart = altair.layer(nintendo_chart, sony_chart)
 game_companies_chart = altair.layer(game_companies_chart, microsoft_chart)
 
 # Generate final chart.
-game_companies_chart
+game_companies_chart.save('area_chart.html')
