@@ -1,18 +1,16 @@
-"""
-This module is intended to create an Scatter Plot from a .csv file.
-Author: Ashlea Walker
-"""
+import os
+
 import altair
 from pandas import read_csv
 
-dataset = read_csv('D:\\Documents\\CS4770_datasets\\Video_Games_Sales_as_at_22_Dec_2016.csv')
+dataset = read_csv(os.path.abspath('../../csv/video_games_sales_as_of_22_Dec_2016.csv'))
 
-nin_data = dataset[dataset['Publisher'] == 'Nintendo']
-# Drop Wii Sports since it is a huge outlier (NA Sales = 41.36, Global Sales = 82.53)
+nintendo_data = dataset[dataset['Publisher'] == 'Nintendo']
+# Drop the game Wii Sports since it is a huge outlier (NA Sales = 41.36, Global Sales = 82.53)
 # within the scale of the other games.
-nin_data = nin_data[nin_data['Name'] != 'Wii Sports']
+nintendo_data = nintendo_data[nintendo_data['Name'] != 'Wii Sports']
 
-nin_chart = altair.Chart(nin_data).mark_point(color='#d20014', opacity=0.5).encode(
+nintendo_chart = altair.Chart(nintendo_data).mark_point(color='#d20014', opacity=0.5).encode(
     altair.X(
         'Global_Sales:Q',
         axis=altair.Axis(title='Number of Global Sales (millions of units)'),
@@ -30,4 +28,4 @@ nin_chart = altair.Chart(nin_data).mark_point(color='#d20014', opacity=0.5).enco
     title='Effect of North America\'s Sales to Global Sales of Nintendo Games'
 ).interactive()
 
-nin_chart
+nintendo_chart.save('scatter_plot.html')
