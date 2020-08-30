@@ -1,7 +1,6 @@
 import os
 
 import plotly
-import numpy
 from pandas import read_csv
 
 # Offline mode
